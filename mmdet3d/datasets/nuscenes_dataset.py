@@ -454,7 +454,7 @@ class NuScenesDataset(Custom3DDataset):
 
         output_dir = osp.join(*osp.split(result_path)[:-1])
         nusc = NuScenes(
-            version=self.version, dataroot='../autodl-tmp/datasetWYC/', verbose=False)
+            version=self.version, dataroot='../autodl-tmp/V2U-COO-TEST/', verbose=False)
         eval_set_map = {
             'v1.0-mini': 'mini_val',
             'v1.0-trainval': 'val',

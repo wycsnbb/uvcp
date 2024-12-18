@@ -129,7 +129,7 @@ def accumulate(gt_boxes: EvalBoxes,
     conf = np.array(conf)
 
     # Calculate precision and recall.
-    prec = tp / (fp + tp) + 0.1
+    prec = tp / (fp + tp)
     rec = tp / float(npos)
 
     rec_interp = np.linspace(0, 1, DetectionMetricData.nelem)  # 101 steps, from 0% to 100% recall.

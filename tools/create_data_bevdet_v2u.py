@@ -108,11 +108,11 @@ def nuscenes_data_prep(root_path, info_prefix, version, max_sweeps=10):
 
 def add_ann_adj_info(extra_tag):
     nuscenes_version = 'v1.14-trainval'
-    dataroot = '../autodl-tmp/datasetWYC/'
+    dataroot = '../autodl-tmp/V2U-COO-TEST/'
     nuscenes = NuScenes(nuscenes_version, dataroot)
-    for set in ['train', 'val']:
+    for set in ['val']:
         dataset = pickle.load(
-            open('../autodl-tmp/datasetWYC/%s_infos_%s.pkl' % (extra_tag, set), 'rb'))
+            open('../autodl-tmp/V2U-COO-TEST/%s_infos_%s.pkl' % (extra_tag, set), 'rb'))
         for id in range(len(dataset['infos'])):
             if id % 10 == 0:
                 print('%d/%d' % (id, len(dataset['infos'])))
@@ -133,8 +133,8 @@ def add_ann_adj_info(extra_tag):
 
             scene = nuscenes.get('scene', sample['scene_token'])
             dataset['infos'][id]['occ_path'] = \
-                '../autodl-tmp/datasetWYC/gts/%s/%s'%(scene['name'], info['token'])
-        with open('../autodl-tmp/datasetWYC/%s_infos_%s.pkl' % (extra_tag, set),
+                '../autodl-tmp/V2U-COO-TEST/gts/%s/%s'%(scene['name'], info['token'])
+        with open('../autodl-tmp/V2U-COO-TEST/%s_infos_%s.pkl' % (extra_tag, set),
                   'wb') as fid:
             pickle.dump(dataset, fid)
 
@@ -143,8 +143,8 @@ if __name__ == '__main__':
     dataset = 'nuscenes'
     version = 'v1.14'
     train_version = f'{version}-trainval'
-    root_path = '../autodl-tmp/datasetWYC/'
-    extra_tag = 'bevdetv2-nuscenes'
+    root_path = '../autodl-tmp/V2U-COO-TEST/'
+    extra_tag = 'uvcp'
     nuscenes_data_prep(
         root_path=root_path,
         info_prefix=extra_tag,

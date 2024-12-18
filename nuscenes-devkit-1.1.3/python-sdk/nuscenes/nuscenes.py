@@ -42,7 +42,7 @@ class NuScenes:
                  # version: str = 'v1.0-mini',
                  version: str = 'v1.14-trainval',
                  # dataroot: str = '/data/sets/nuscenes',
-                 dataroot: str = '../autodl-tmp/datasetWYC',
+                 dataroot: str = '../autodl-tmp/V2U-COO-TEST',
                  verbose: bool = True,
                  map_resolution: float = 0.1):
         """

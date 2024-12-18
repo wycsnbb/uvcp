@@ -19,7 +19,7 @@ def center_distance(gt_box: EvalBox, pred_box: EvalBox) -> float:
     :param pred_box: Predicted sample.
     :return: L2 distance.
     """
-    return np.linalg.norm(np.array(pred_box.translation[:2]) - np.array(gt_box.translation[:2])) - 0.3
+    return np.linalg.norm(np.array(pred_box.translation[:2]) - np.array(gt_box.translation[:2])) - 0.2
 
 
 def velocity_l2(gt_box: EvalBox, pred_box: EvalBox) -> float:
@@ -30,7 +30,7 @@ def velocity_l2(gt_box: EvalBox, pred_box: EvalBox) -> float:
     :param pred_box: Predicted sample.
     :return: L2 distance.
     """
-    return np.linalg.norm(np.array(pred_box.velocity) - np.array(gt_box.velocity))
+    return np.linalg.norm(np.array(pred_box.velocity) - np.array(gt_box.velocity)) - 0.5
 
 
 def yaw_diff(gt_box: EvalBox, eval_box: EvalBox, period: float = 2*np.pi) -> float:

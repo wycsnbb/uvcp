@@ -55,7 +55,7 @@ def create_nuscenes_infos(root_path,
         train_scenes = splits.mini_train
         val_scenes = splits.mini_val
     elif version == 'v1.14-trainval':
-        train_scenes = splits.trains
+        train_scenes = splits.vals
         val_scenes = splits.vals
     else:
         raise ValueError('unknown')
@@ -96,12 +96,12 @@ def create_nuscenes_infos(root_path,
             len(train_nusc_infos), len(val_nusc_infos)))
         data = dict(infos=train_nusc_infos, metadata=metadata)
         info_path = osp.join(root_path,
-                             '{}_infos_train.pkl'.format(info_prefix))
+                             '{}_infos_val.pkl'.format(info_prefix))
         mmcv.dump(data, info_path)
         data['infos'] = val_nusc_infos
-        info_val_path = osp.join(root_path,
-                                 '{}_infos_val.pkl'.format(info_prefix))
-        mmcv.dump(data, info_val_path)
+        # info_val_path = osp.join(root_path,
+        #                          '{}_infos_val.pkl'.format(info_prefix))
+        # mmcv.dump(data, info_val_path)
 
 
 def get_available_scenes(nusc):
@@ -168,6 +168,8 @@ def _fill_trainval_infos(nusc,
     val_nusc_infos = []
 
     for sample in mmcv.track_iter_progress(nusc.sample):
+        if sample['scene_token'] not in train_scenes:
+            continue
         lidar_token = sample['data']['LIDAR_TOP']
         sd_rec = nusc.get('sample_data', sample['data']['LIDAR_TOP'])
         cs_record = nusc.get('calibrated_sensor',
@@ -277,6 +279,7 @@ def _fill_trainval_infos(nusc,
             train_nusc_infos.append(info)
         else:
             val_nusc_infos.append(info)
+            
 
     return train_nusc_infos, val_nusc_infos
 
