@@ -1,6 +1,6 @@
 # UVCP
 
-1. CUDA installation：
+1. CUDA(11.3) installation：
    
 ```bash
   wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
